@@ -36,8 +36,6 @@ export const SwiperComponent = () => {
         spaceBetween={10}
         slidesPerView={1}
         navigation
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {Object.values(imageData).map((item, index) => (
           <SwiperSlide key={index}>
