@@ -26,9 +26,9 @@ export const ItemDesc = ({
   const priceWithDiscount =
     itemData.price - (itemData.price * itemData.discount) / 100;
   return (
-    <div className="flex flex-col gap-3 font-bold p-5">
+    <div className="flex flex-col gap-3 font-bold p-5 lg:pt-20">
       <p className="tracking-widest leading-none text-xs">{itemData.company}</p>
-      <h1 className="text-2xl leading-none font-bold w-[300px]">
+      <h1 className="text-2xl leading-none font-bold w-[300px] lg:w-[400px] lg:text-[40px]">
         {itemData.title}
       </h1>
       <p className="text-gray-500 text-sm font-semibold">
@@ -43,30 +43,32 @@ export const ItemDesc = ({
           ${itemData.price.toFixed(2)}
         </p>
       </div>
-      <div className="flex justify-between px-5">
+      <div className="flex flex-col lg:flex-row gap-3">
+        <div className="flex justify-between px-5 py-3 bg-gray-100 rounded-md lg:w-[170px]">
+          <button
+            type="button"
+            onClick={() => {
+              if (itemCounter > 0) {
+                setItemCounter(itemCounter - 1);
+              }
+            }}
+          >
+            <img src={removeIcon} alt="remove icon" />
+          </button>
+          <p>{itemCounter}</p>
+          <button type="button" onClick={() => setItemCounter(itemCounter + 1)}>
+            <img src={addIcon} alt="add icon" />
+          </button>
+        </div>
         <button
           type="button"
-          onClick={() => {
-            if (itemCounter > 0) {
-              setItemCounter(itemCounter - 1);
-            }
-          }}
+          onClick={() => handleAddToCart(itemData, itemCounter)}
+          className="flex justify-center w-full items-center gap-3 bg-orange-400 py-3 rounded-md"
         >
-          <img src={removeIcon} alt="remove icon" />
-        </button>
-        <p>{itemCounter}</p>
-        <button type="button" onClick={() => setItemCounter(itemCounter + 1)}>
-          <img src={addIcon} alt="add icon" />
+          <img src={cartIcon} alt="cart icon" className="w-4 h-4" />
+          Add to cart
         </button>
       </div>
-      <button
-        type="button"
-        onClick={() => handleAddToCart(itemData, itemCounter)}
-        className="flex justify-center items-center gap-3 bg-orange-400 py-3 rounded-md"
-      >
-        <img src={cartIcon} alt="cart icon" className="w-4 h-4" />
-        Add to cart
-      </button>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { A11y, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/less/pagination";
 import { SwiperNavigation } from "./SwiperNavigation";
+import { useDeviceSize } from "../../hooks/useDeviceSize";
 
 const imageData = {
   1: {
@@ -29,8 +30,9 @@ const imageData = {
 };
 
 export const SwiperComponent = () => {
+  const { width } = useDeviceSize();
   return (
-    <div className="mt-6 relative">
+    <div className="mt-6 relative lg:max-w-[400px]">
       <Swiper
         modules={[Navigation, Pagination, A11y]}
         spaceBetween={10}
@@ -39,10 +41,14 @@ export const SwiperComponent = () => {
       >
         {Object.values(imageData).map((item, index) => (
           <SwiperSlide key={index}>
-            <img src={item.image} alt="product image" />
+            <img
+              src={item.image}
+              alt="product image"
+              className="lg:w-[400px] lg:rounded-xl"
+            />
           </SwiperSlide>
         ))}
-        <SwiperNavigation />
+        {width < 768 && <SwiperNavigation />}
       </Swiper>
     </div>
   );

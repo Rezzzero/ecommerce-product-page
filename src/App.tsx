@@ -38,19 +38,21 @@ function App() {
 
   return (
     <>
-      <div className="fixed top-0 z-10 bg-white container mx-auto">
+      <div className="fixed top-0 lg:static z-10 bg-white container mx-auto">
         <NavBar
           openModal={() => setIsModalOpen(true)}
           openCartModal={() => setOpenCartModal(true)}
           cartLength={cart.length}
         />
       </div>
-      <SwiperComponent />
-      <ItemDesc
-        itemCounter={itemCounter}
-        handleAddToCart={handleAddToCart}
-        setItemCounter={setItemCounter}
-      />
+      <div className="lg:container lg:mx-auto lg:flex lg:gap-20 lg:px-20 lg:pt-20">
+        <SwiperComponent />
+        <ItemDesc
+          itemCounter={itemCounter}
+          handleAddToCart={handleAddToCart}
+          setItemCounter={setItemCounter}
+        />
+      </div>
       {isModalOpen && <NavModal closeModal={() => setIsModalOpen(false)} />}
       {openCartModal && (
         <CartModal
