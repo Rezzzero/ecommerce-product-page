@@ -2,6 +2,7 @@ import { useSwiper } from "swiper/react";
 import prevIcon from "../../assets/icons/icon-previous.svg";
 import nextIcon from "../../assets/icons/icon-next.svg";
 import { useDeviceSize } from "../../hooks/useDeviceSize";
+import { useEffect, useState } from "react";
 
 export const SwiperNavigation = ({
   imageData,
@@ -10,6 +11,15 @@ export const SwiperNavigation = ({
 }) => {
   const { width } = useDeviceSize();
   const swiper = useSwiper();
+  const [activeIndex, setActiveIndex] = useState(swiper.activeIndex);
+
+  useEffect(() => {
+    const handleSlideChange = () => setActiveIndex(swiper.activeIndex);
+
+    swiper.on("slideChange", handleSlideChange);
+
+    return () => swiper.off("slideChange", handleSlideChange);
+  }, [swiper]);
 
   return (
     <>
@@ -33,15 +43,25 @@ export const SwiperNavigation = ({
       ) : (
         <div className="flex gap-8 mt-10">
           {Object.values(imageData).map((item, index) => (
-            <img
+            <div
               key={index}
-              src={item.image}
-              alt="product image"
-              onClick={() => {
-                swiper.slideTo(index);
-              }}
-              className="w-[90px] rounded-xl hover:opacity-50 cursor-pointer"
-            />
+              className={`${
+                activeIndex === index
+                  ? "border-3 border-orange-600  rounded-xl"
+                  : ""
+              }`}
+            >
+              <img
+                src={item.image}
+                alt="product image"
+                onClick={() => {
+                  swiper.slideTo(index);
+                }}
+                className={`w-[90px] ${
+                  activeIndex === index && "opacity-30"
+                } rounded-xl hover:opacity-50 cursor-pointer`}
+              />
+            </div>
           ))}
         </div>
       )}
