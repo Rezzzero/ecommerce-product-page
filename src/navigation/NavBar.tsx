@@ -7,11 +7,11 @@ import { useDeviceSize } from "../hooks/useDeviceSize";
 
 export const NavBar = ({
   openModal,
-  openCartModal,
+  isCartModalOpen,
   cartLength,
 }: {
   openModal: () => void;
-  openCartModal: () => void;
+  isCartModalOpen: () => void;
   cartLength: number;
 }) => {
   const { width } = useDeviceSize();
@@ -33,7 +33,7 @@ export const NavBar = ({
         <div className="relative">
           <img
             src={cartLogo}
-            onClick={openCartModal}
+            onClick={isCartModalOpen}
             alt="cart logo"
             className="h-5 cursor-pointer"
           />

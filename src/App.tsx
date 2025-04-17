@@ -5,17 +5,21 @@ import { CartModal } from "./components/cart/CartModal";
 import { SwiperComponent } from "./components/swiper/SwiperComponent";
 import { ItemDesc } from "./components/item/ItemDesc";
 import { ItemType } from "./types/types";
+import { ProductModal } from "./components/product/ProductModal";
+import { useDeviceSize } from "./hooks/useDeviceSize";
 
 function App() {
   const [itemCounter, setItemCounter] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openCartModal, setOpenCartModal] = useState(false);
+  const [isNavModalOpen, setIsNavModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [cart, setCart] = useState<ItemType[]>([]);
+  const { width } = useDeviceSize();
 
   useEffect(() => {
     const body = document.body;
 
-    if (isModalOpen || openCartModal) {
+    if (isNavModalOpen || isCartModalOpen || isProductModalOpen) {
       body.style.overflow = "hidden";
     } else {
       body.style.overflow = "";
@@ -24,7 +28,7 @@ function App() {
     return () => {
       body.style.overflow = "";
     };
-  }, [isModalOpen, openCartModal]);
+  }, [isNavModalOpen, isCartModalOpen, isProductModalOpen]);
 
   const handleAddToCart = (item: ItemType, itemCounter: number) => {
     for (let i = 0; i < itemCounter; i++) {
@@ -40,26 +44,31 @@ function App() {
     <>
       <div className="fixed top-0 lg:static z-10 bg-white container mx-auto">
         <NavBar
-          openModal={() => setIsModalOpen(true)}
-          openCartModal={() => setOpenCartModal(true)}
+          openModal={() => setIsNavModalOpen(true)}
+          isCartModalOpen={() => setIsCartModalOpen(true)}
           cartLength={cart.length}
         />
       </div>
       <div className="lg:container lg:mx-auto lg:flex lg:justify-between lg:px-30 lg:pt-16">
-        <SwiperComponent />
+        <SwiperComponent openModal={() => setIsProductModalOpen(true)} />
         <ItemDesc
           itemCounter={itemCounter}
           handleAddToCart={handleAddToCart}
           setItemCounter={setItemCounter}
         />
       </div>
-      {isModalOpen && <NavModal closeModal={() => setIsModalOpen(false)} />}
-      {openCartModal && (
+      {isNavModalOpen && (
+        <NavModal closeModal={() => setIsNavModalOpen(false)} />
+      )}
+      {isCartModalOpen && (
         <CartModal
           cart={cart}
           handleRemoveFromCart={handleRemoveFromCart}
-          closeModal={() => setOpenCartModal(false)}
+          closeModal={() => setIsCartModalOpen(false)}
         />
+      )}
+      {isProductModalOpen && width > 1024 && (
+        <ProductModal closeModal={() => setIsProductModalOpen(false)} />
       )}
     </>
   );

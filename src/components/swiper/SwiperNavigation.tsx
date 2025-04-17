@@ -3,6 +3,7 @@ import prevIcon from "../../assets/icons/icon-previous.svg";
 import nextIcon from "../../assets/icons/icon-next.svg";
 import { useDeviceSize } from "../../hooks/useDeviceSize";
 import { useEffect, useState } from "react";
+import { SwiperNavByImages } from "./SwiperNavByImages";
 
 export const SwiperNavigation = ({
   imageData,
@@ -41,29 +42,7 @@ export const SwiperNavigation = ({
           </button>
         </>
       ) : (
-        <div className="flex gap-8 mt-10">
-          {Object.values(imageData).map((item, index) => (
-            <div
-              key={index}
-              className={`${
-                activeIndex === index
-                  ? "border-3 border-orange-600  rounded-xl"
-                  : ""
-              }`}
-            >
-              <img
-                src={item.image}
-                alt="product image"
-                onClick={() => {
-                  swiper.slideTo(index);
-                }}
-                className={`w-[90px] ${
-                  activeIndex === index && "opacity-30"
-                } rounded-xl hover:opacity-50 cursor-pointer`}
-              />
-            </div>
-          ))}
-        </div>
+        <SwiperNavByImages imageData={imageData} activeIndex={activeIndex} />
       )}
     </>
   );

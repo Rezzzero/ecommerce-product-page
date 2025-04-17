@@ -3,32 +3,9 @@ import { A11y, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/less/pagination";
 import { SwiperNavigation } from "./SwiperNavigation";
+import { imageData } from "../../constants/constants";
 
-const imageData = {
-  1: {
-    thumbnail: "/images/image-product-1-thumbnail.jpg",
-    image: "/images/image-product-1.jpg",
-  },
-  2: {
-    thumbnail: "/images/image-product-2-thumbnail.jpg",
-    image: "/images/image-product-2.jpg",
-  },
-  3: {
-    thumbnail: "/images/image-product-3-thumbnail.jpg",
-    image: "/images/image-product-3.jpg",
-  },
-  4: {
-    thumbnail: "/images/image-product-4-thumbnail.jpg",
-    image: "/images/image-product-4.jpg",
-  },
-} as {
-  [key: number]: {
-    thumbnail: string;
-    image: string;
-  };
-};
-
-export const SwiperComponent = () => {
+export const SwiperComponent = ({ openModal }: { openModal: () => void }) => {
   return (
     <div className="mt-6 relative lg:max-w-[460px]">
       <Swiper
@@ -42,7 +19,8 @@ export const SwiperComponent = () => {
             <img
               src={item.image}
               alt="product image"
-              className="lg:w-[460px] lg:rounded-xl"
+              onClick={openModal}
+              className="lg:w-[460px] lg:rounded-xl cursor-pointer"
             />
           </SwiperSlide>
         ))}
