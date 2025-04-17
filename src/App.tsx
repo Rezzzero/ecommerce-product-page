@@ -45,7 +45,7 @@ function App() {
           cartLength={cart.length}
         />
       </div>
-      <div className="lg:container lg:mx-auto lg:flex lg:gap-20 lg:px-20 lg:pt-20">
+      <div className="lg:container lg:mx-auto lg:flex lg:justify-between lg:px-30 lg:pt-16">
         <SwiperComponent />
         <ItemDesc
           itemCounter={itemCounter}

@@ -32,7 +32,7 @@ const imageData = {
 export const SwiperComponent = () => {
   const { width } = useDeviceSize();
   return (
-    <div className="mt-6 relative lg:max-w-[400px]">
+    <div className="mt-6 relative lg:max-w-[450px]">
       <Swiper
         modules={[Navigation, Pagination, A11y]}
         spaceBetween={10}
@@ -44,7 +44,7 @@ export const SwiperComponent = () => {
             <img
               src={item.image}
               alt="product image"
-              className="lg:w-[400px] lg:rounded-xl"
+              className="lg:w-[450px] lg:rounded-xl"
             />
           </SwiperSlide>
         ))}

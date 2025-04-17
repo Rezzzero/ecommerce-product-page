@@ -35,7 +35,7 @@ export const NavBar = ({
             src={cartLogo}
             onClick={openCartModal}
             alt="cart logo"
-            className="h-5"
+            className="h-5 cursor-pointer"
           />
           {cartLength > 0 && (
             <div className="bg-orange-400 flex justify-center items-center font-semibold absolute top-[-4px] right-[-4px] text-white text-xs w-4 h-3 rounded-full">
@@ -43,7 +43,11 @@ export const NavBar = ({
             </div>
           )}
         </div>
-        <img src={userIcon} alt="user icon" className="w-6 lg:w-10" />
+        <img
+          src={userIcon}
+          alt="user icon"
+          className="w-6 lg:w-10 cursor-pointer hover:border-3 hover:border-orange-400 rounded-full"
+        />
       </div>
     </div>
   );

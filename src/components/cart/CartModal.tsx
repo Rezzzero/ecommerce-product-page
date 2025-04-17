@@ -16,7 +16,7 @@ export const CartModal = ({
     <div>
       <div className="fixed z-10 inset-0" onClick={closeModal} />
 
-      <div className="fixed z-20 top-20 left-3 flex flex-col bg-white font-bold p-5 w-[352px] h-[230px] rounded-md">
+      <div className="fixed z-20 top-20 left-3 flex flex-col bg-white font-bold p-5 w-[352px] h-[230px] rounded-md lg:top-24 lg:right-15 lg:left-auto lg:shadow-[0_15px_25px_-10px_rgba(0,0,0,0.5)]">
         <h1 className={`${cart.length > 0 ? "mb-12" : "mb-5"}`}>Cart</h1>
         {cart.length > 0 ? (
           <div>
